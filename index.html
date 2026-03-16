@@ -65,9 +65,6 @@
         .token-bar-fill { height: 100%; background: linear-gradient(90deg, #7c3aed, #22d3ee); border-radius: 99px; }
         
         .grid-overlay { position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 30px 30px; mask-image: linear-gradient(to bottom, black, transparent); pointer-events: none; }
-        
-        .team-image { filter: grayscale(100%); transition: 0.5s; object-position: top; }
-        .team-image:hover { filter: grayscale(0%); transform: scale(1.05); }
 
         @keyframes pulse-border {
             0% { border-color: rgba(124, 58, 237, 0.3); }
@@ -80,15 +77,8 @@
         .success-animate { animation: scaleUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
 
         /* Contact Modal */
-        #contactModal { 
-            display: none; 
-            align-items: flex-end; 
-            justify-content: center;
-        }
-        #contactModal.show { 
-            display: flex; 
-            animation: overlayFade 0.4s ease forwards; 
-        }
+        #contactModal { display: none; align-items: flex-end; justify-content: center; }
+        #contactModal.show { display: flex; animation: overlayFade 0.4s ease forwards; }
         #contactModal .glass-sheet {
             transform: translateY(100%);
             transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -103,10 +93,7 @@
         @keyframes overlayFade { from { background: rgba(0,0,0,0); } to { background: rgba(0,0,0,0.85); } }
 
         /* Hurry Popup */
-        #hurryPopup {
-            transform: translateX(-120%);
-            transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
+        #hurryPopup { transform: translateX(-120%); transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
         #hurryPopup.active { transform: translateX(0); }
 
         .infographic-dot { animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
@@ -115,20 +102,10 @@
         .status-live::after { content: ''; position: absolute; inset: -4px; border: 2px solid #22c55e; border-radius: 50%; animation: ping 1.5s infinite; }
 
         .mlm-plan-card { 
-            display: flex; 
-            align-items: center; 
-            gap: 1rem; 
-            padding: 1.25rem; 
-            border-radius: 1.25rem; 
-            transition: 0.4s; 
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.05);
+            display: flex; align-items: center; gap: 1rem; padding: 1.25rem; border-radius: 1.25rem; 
+            transition: 0.4s; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
         }
-        .mlm-plan-card:hover { 
-            background: rgba(124, 58, 237, 0.1); 
-            border-color: #7c3aed;
-            transform: translateX(12px); 
-        }
+        .mlm-plan-card:hover { background: rgba(124, 58, 237, 0.1); border-color: #7c3aed; transform: translateX(12px); }
         .mlm-center-circle {
             background: radial-gradient(circle, rgba(124, 58, 237, 0.2) 0%, rgba(2, 6, 23, 1) 100%);
             box-shadow: 0 0 50px rgba(124, 58, 237, 0.2);
@@ -138,35 +115,97 @@
         #mobileMenu { display: none; }
         #mobileMenu.open { display: flex; }
 
-        /* Prevent horizontal overflow on small screens */
         section, header, footer, nav { max-width: 100vw; overflow-x: hidden; }
 
-        /* Fix floating buttons on mobile */
         @media (max-width: 640px) {
-            #hurryPopup {
-                left: 8px;
-                right: 8px;
-                bottom: 100px;
-                max-width: calc(100vw - 16px);
-            }
-            .fixed.bottom-8.right-8 {
-                bottom: 1rem;
-                right: 1rem;
-            }
+            #hurryPopup { left: 8px; right: 8px; bottom: 110px; max-width: calc(100vw - 16px); }
         }
 
         /* Scrollbar styling */
         #contactModal .glass-sheet::-webkit-scrollbar { width: 4px; }
         #contactModal .glass-sheet::-webkit-scrollbar-track { background: transparent; }
         #contactModal .glass-sheet::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.4); border-radius: 99px; }
+
+        /* Floating buttons */
+        .float-btn {
+            width: 52px; height: 52px;
+            border-radius: 18px;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            transition: all 0.25s;
+            border: 1px solid rgba(255,255,255,0.15);
+            position: relative;
+        }
+        .float-btn:hover { transform: scale(1.12); }
+        .float-btn .tooltip {
+            position: absolute; right: 64px; top: 50%; transform: translateY(-50%);
+            background: rgba(10,14,28,0.95); border: 1px solid rgba(255,255,255,0.1);
+            color: #fff; font-size: 11px; font-weight: 700; white-space: nowrap;
+            padding: 6px 12px; border-radius: 10px; pointer-events: none;
+            opacity: 0; transition: 0.2s;
+        }
+        .float-btn:hover .tooltip { opacity: 1; }
+
+        /* Lead banner */
+        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .marquee-inner { display: flex; animation: marquee 30s linear infinite; width: max-content; }
+        .marquee-inner:hover { animation-play-state: paused; }
+
+        /* Team skill cards */
+        .skill-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 2rem;
+            padding: 2rem;
+            transition: 0.4s;
+        }
+        .skill-card:hover {
+            background: rgba(124,58,237,0.08);
+            border-color: rgba(124,58,237,0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(124,58,237,0.15);
+        }
+
+        /* Trust badges */
+        .trust-pill {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 100px; padding: 6px 14px;
+            font-size: 10px; font-weight: 700; color: #94a3b8;
+            letter-spacing: 0.05em; text-transform: uppercase;
+        }
+
+        /* CTA urgency banner */
+        .urgency-bar {
+            background: linear-gradient(90deg, rgba(124,58,237,0.8), rgba(34,211,238,0.8));
+        }
+
+        @keyframes glow-pulse {
+            0%,100% { box-shadow: 0 0 20px rgba(37,211,102,0.4); }
+            50% { box-shadow: 0 0 40px rgba(37,211,102,0.7); }
+        }
+        .wa-glow { animation: glow-pulse 2s infinite; }
+
+        @keyframes tg-glow {
+            0%,100% { box-shadow: 0 0 20px rgba(0,136,204,0.4); }
+            50% { box-shadow: 0 0 40px rgba(0,136,204,0.7); }
+        }
+        .tg-glow { animation: tg-glow 2s infinite 0.5s; }
     </style>
 </head>
 <body>
 
     <div class="glow-bg"></div>
 
+    <!-- Urgency Top Banner -->
+    <div class="urgency-bar py-2 px-4 text-center text-[10px] font-black uppercase tracking-widest text-white fixed top-0 left-0 right-0 z-[200]">
+        ⚡ Limited Slots Available — Free Consultation Ends Soon &nbsp;|&nbsp; 
+        <a href="https://wa.me/919059794802" target="_blank" class="underline">Chat on WhatsApp Now →</a>
+    </div>
+
     <!-- Hurry Popup -->
-    <div id="hurryPopup" class="fixed bottom-28 left-4 sm:bottom-8 sm:right-32 sm:left-auto z-[60] w-[calc(100vw-2rem)] sm:w-auto sm:max-w-[300px]">
+    <div id="hurryPopup" class="fixed bottom-28 left-4 sm:bottom-10 sm:left-6 z-[60] w-[calc(100vw-2rem)] sm:w-auto sm:max-w-[300px]">
         <div class="glass p-5 rounded-3xl border border-brand-accent/40 shadow-2xl relative overflow-hidden">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 flex-shrink-0 bg-brand-accent/20 rounded-2xl flex items-center justify-center text-brand-accent">
@@ -177,7 +216,7 @@
                     <p class="text-[13px] text-white font-bold uppercase tracking-tighter">20% Off Your Project</p>
                 </div>
             </div>
-            <button onclick="openModal()" class="w-full mt-4 py-3 bg-brand-accent text-black text-[10px] font-black uppercase tracking-widest rounded-xl hover:scale-105 transition">Order Today</button>
+            <button onclick="openModal()" class="w-full mt-4 py-3 bg-brand-accent text-black text-[10px] font-black uppercase tracking-widest rounded-xl hover:scale-105 transition">Claim Discount Now</button>
             <button onclick="document.getElementById('hurryPopup').classList.remove('active')" class="absolute top-2 right-2 text-slate-500"><i data-lucide="x" class="w-4 h-4"></i></button>
         </div>
     </div>
@@ -192,24 +231,53 @@
             
             <div id="formContainer">
                 <div class="text-center mb-8">
-                    <span class="text-brand-secondary font-black text-[10px] uppercase tracking-[0.4em] mb-2 block">Secure Your Project Today</span>
-                    <h3 class="font-display text-3xl md:text-4xl font-black mb-2 uppercase tracking-tighter">Elite <span class="text-brand-primary">Consultation</span></h3>
-                    <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Connect with our Lead Engineers</p>
+                    <span class="text-brand-secondary font-black text-[10px] uppercase tracking-[0.4em] mb-2 block">🔒 Secure & Confidential</span>
+                    <h3 class="font-display text-3xl md:text-4xl font-black mb-2 uppercase tracking-tighter">Free <span class="text-brand-primary">Consultation</span></h3>
+                    <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Response Within 30 Minutes via WhatsApp</p>
+                    <!-- Quick contact pills -->
+                    <div class="flex flex-wrap justify-center gap-3 mt-5">
+                        <a href="https://wa.me/919059794802" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-[#25d366]/10 border border-[#25d366]/30 rounded-xl text-[#25d366] text-[11px] font-black uppercase tracking-wide hover:bg-[#25d366] hover:text-white transition">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i> WhatsApp Now
+                        </a>
+                        <a href="https://t.me/CryptoRovermaster" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-[#0088cc]/10 border border-[#0088cc]/30 rounded-xl text-[#0088cc] text-[11px] font-black uppercase tracking-wide hover:bg-[#0088cc] hover:text-white transition">
+                            <i data-lucide="send" class="w-4 h-4"></i> Telegram Now
+                        </a>
+                        <a href="tel:+919059794802" class="flex items-center gap-2 px-4 py-2 bg-brand-primary/10 border border-brand-primary/30 rounded-xl text-brand-primary text-[11px] font-black uppercase tracking-wide hover:bg-brand-primary hover:text-white transition">
+                            <i data-lucide="phone" class="w-4 h-4"></i> Call Now
+                        </a>
+                    </div>
                 </div>
                 
                 <form id="eliteForm" action="https://formspree.io/f/mojklppv" method="POST" class="grid md:grid-cols-2 gap-5">
                     <div class="space-y-4">
-                        <input type="text" name="name" placeholder="Full Name" required class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-brand-primary transition text-white placeholder:text-slate-500">
-                        <input type="email" name="email" placeholder="Mail ID (Official/Personal)" required class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-brand-primary transition text-white placeholder:text-slate-500">
-                        <input type="tel" name="phone" placeholder="WhatsApp Number" required class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-brand-primary transition text-white placeholder:text-slate-500">
+                        <input type="text" name="name" placeholder="Full Name *" required class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-brand-primary transition text-white placeholder:text-slate-500">
+                        <input type="email" name="email" placeholder="Email Address *" required class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-brand-primary transition text-white placeholder:text-slate-500">
+                        <input type="tel" name="phone" placeholder="WhatsApp Number *" required class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-brand-primary transition text-white placeholder:text-slate-500">
+                        <select name="service" class="w-full bg-[#0d1525] border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-brand-primary transition text-white">
+                            <option value="" disabled selected>Select Service *</option>
+                            <option>Blockchain / Smart Contract Development</option>
+                            <option>MLM Software Development</option>
+                            <option>DApp / DeFi Development</option>
+                            <option>Crypto Exchange / Wallet</option>
+                            <option>Tokenomics / Token Launch</option>
+                            <option>Other</option>
+                        </select>
                     </div>
-                    <div class="flex flex-col">
-                        <textarea name="project_details" placeholder="Briefly describe your requirements..." required class="w-full flex-1 min-h-[140px] bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-brand-primary transition text-white placeholder:text-slate-500 resize-none"></textarea>
+                    <div class="flex flex-col gap-4">
+                        <textarea name="project_details" placeholder="Describe your project requirements..." required class="w-full flex-1 min-h-[140px] bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-brand-primary transition text-white placeholder:text-slate-500 resize-none"></textarea>
+                        <select name="budget" class="w-full bg-[#0d1525] border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-brand-primary transition text-white">
+                            <option value="" disabled selected>Project Budget</option>
+                            <option>$1,000 – $5,000</option>
+                            <option>$5,000 – $15,000</option>
+                            <option>$15,000 – $50,000</option>
+                            <option>$50,000+</option>
+                        </select>
                     </div>
                     <div class="md:col-span-2">
                         <button type="submit" id="submitBtn" class="btn-elite w-full py-4 text-[11px] uppercase tracking-[0.3em] font-black">
-                            Initialize Free Consultation
+                            🚀 Send My Free Consultation Request
                         </button>
+                        <p class="text-center text-[10px] text-slate-500 mt-3 uppercase tracking-widest">No spam. We respond within 30 min on WhatsApp.</p>
                     </div>
                 </form>
             </div>
@@ -218,25 +286,43 @@
                 <div class="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-green-500/50">
                     <i data-lucide="check-circle" class="text-green-500 w-10 h-10"></i>
                 </div>
-                <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase tracking-tighter grad-text">Request Received Successfully!</h3>
-                <p class="text-slate-300 text-sm max-w-md mx-auto leading-relaxed">Thank you for choosing Smart Chain Labs. Our executive will review your requirements and get back to you <span class="text-brand-secondary font-bold">within a few hours.</span></p>
-                <button onclick="closeModal()" class="mt-8 text-[10px] font-black uppercase tracking-widest text-brand-primary border border-brand-primary/30 px-6 py-2 rounded-lg hover:bg-brand-primary hover:text-white transition">Back to Site</button>
+                <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase tracking-tighter grad-text">Request Received!</h3>
+                <p class="text-slate-300 text-sm max-w-md mx-auto leading-relaxed mb-6">Our team will reach you on WhatsApp <span class="text-brand-secondary font-bold">within 30 minutes.</span> Can't wait? Contact us directly:</p>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <a href="https://wa.me/919059794802" target="_blank" class="flex items-center gap-2 px-5 py-3 bg-[#25d366] text-white rounded-xl text-[11px] font-black uppercase hover:scale-105 transition">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i> WhatsApp Us
+                    </a>
+                    <a href="https://t.me/CryptoRovermaster" target="_blank" class="flex items-center gap-2 px-5 py-3 bg-[#0088cc] text-white rounded-xl text-[11px] font-black uppercase hover:scale-105 transition">
+                        <i data-lucide="send" class="w-4 h-4"></i> Telegram Us
+                    </a>
+                </div>
+                <button onclick="closeModal()" class="mt-6 text-[10px] font-black uppercase tracking-widest text-brand-primary border border-brand-primary/30 px-6 py-2 rounded-lg hover:bg-brand-primary hover:text-white transition">Back to Site</button>
             </div>
         </div>
     </div>
 
-    <!-- Floating Action Buttons -->
-    <div class="fixed bottom-6 right-4 sm:bottom-8 sm:right-8 flex flex-col gap-3 z-50">
-        <a href="tel:+910000000000" class="w-12 h-12 sm:w-14 sm:h-14 bg-brand-primary rounded-2xl flex items-center justify-center shadow-2xl hover:scale-110 transition border border-white/20">
-            <i data-lucide="phone-forwarded" class="text-white w-5 h-5"></i>
+    <!-- ✅ Floating Action Buttons: Call + WhatsApp + Telegram -->
+    <div class="fixed bottom-6 right-4 sm:bottom-8 sm:right-6 flex flex-col gap-3 z-50">
+        <div class="float-btn bg-brand-primary wa-glow" onclick="openModal()" style="cursor:pointer;">
+            <i data-lucide="mail" class="text-white w-5 h-5"></i>
+            <span class="tooltip">Get Free Quote</span>
+        </div>
+        <a href="tel:+919059794802" class="float-btn bg-brand-primary">
+            <i data-lucide="phone-call" class="text-white w-5 h-5"></i>
+            <span class="tooltip">Call Us: +91 90597 94802</span>
         </a>
-        <a href="https://wa.me/910000000000" target="_blank" class="w-12 h-12 sm:w-14 sm:h-14 bg-[#25d366] rounded-2xl flex items-center justify-center shadow-2xl hover:scale-110 transition border border-white/20">
-            <i data-lucide="message-circle" class="text-white w-5 h-5"></i>
+        <a href="https://wa.me/919059794802?text=Hi%20Smart%20Chain%20Labs%2C%20I%27m%20interested%20in%20your%20services." target="_blank" class="float-btn bg-[#25d366] wa-glow">
+            <svg viewBox="0 0 32 32" class="w-6 h-6 fill-white"><path d="M16 3C9.373 3 4 8.373 4 15c0 2.385.832 4.584 2.225 6.34L4.5 28l6.82-1.693A12.93 12.93 0 0016 27c6.627 0 12-5.373 12-12S22.627 3 16 3zm0 22a10.95 10.95 0 01-5.6-1.54l-.4-.24-4.04 1.002.962-3.93-.26-.41A10.96 10.96 0 015 15C5 8.925 9.925 4 16 4s11 4.925 11 11-4.925 10-11 10zm6.16-7.55c-.337-.169-1.996-.984-2.306-1.096-.31-.113-.536-.169-.762.169s-.874 1.097-1.072 1.322c-.197.226-.394.254-.73.085-.338-.169-1.425-.525-2.715-1.675-1.003-.895-1.68-2.002-1.876-2.34-.198-.337-.022-.52.148-.687.153-.15.337-.394.506-.591.168-.197.225-.338.337-.563.113-.226.057-.424-.028-.591-.084-.169-.762-1.833-1.044-2.51-.275-.658-.555-.568-.762-.579l-.648-.011c-.226 0-.591.085-.9.424-.31.338-1.184 1.158-1.184 2.822s1.212 3.27 1.38 3.496c.17.226 2.388 3.646 5.787 5.113.808.35 1.44.558 1.932.714.812.258 1.552.222 2.137.135.651-.097 2.002-.818 2.285-1.61.283-.79.283-1.466.197-1.609-.084-.143-.31-.228-.648-.396z"/></svg>
+            <span class="tooltip">WhatsApp: +91 90597 94802</span>
+        </a>
+        <a href="https://t.me/CryptoRovermaster" target="_blank" class="float-btn bg-[#0088cc] tg-glow">
+            <svg viewBox="0 0 32 32" class="w-6 h-6 fill-white"><path d="M16 3C8.82 3 3 8.82 3 16s5.82 13 13 13 13-5.82 13-13S23.18 3 16 3zm6.43 8.9l-2.2 10.37c-.16.72-.59.9-1.19.56l-3.3-2.43-1.59 1.53c-.18.18-.33.33-.67.33l.24-3.38 6.13-5.54c.27-.24-.06-.37-.41-.14L9.5 18.64l-3.25-.97c-.71-.22-.72-.71.15-1.05l12.68-4.89c.59-.22 1.11.13.35 1.17z"/></svg>
+            <span class="tooltip">Telegram: @CryptoRovermaster</span>
         </a>
     </div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 py-4 px-4 sm:px-6 lg:px-10 top-0 border-b border-white/5 bg-brand-dark/60 backdrop-blur-xl">
+    <nav class="fixed w-full z-50 py-4 px-4 sm:px-6 lg:px-10 top-8 border-b border-white/5 bg-brand-dark/60 backdrop-blur-xl">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 sm:w-12 sm:h-12 bg-white/5 p-1 rounded-xl flex items-center justify-center border border-white/10 shadow-xl flex-shrink-0">
@@ -252,22 +338,23 @@
             <div class="hidden lg:flex items-center gap-8 xl:gap-10 text-[10px] font-black uppercase tracking-widest text-slate-400">
                 <a href="#solutions" class="hover:text-brand-primary transition">Solutions</a>
                 <a href="#portfolio" class="hover:text-brand-primary transition">Live Projects</a>
-                <a href="#team" class="hover:text-brand-primary transition">Our Team</a>
+                <a href="#expertise" class="hover:text-brand-primary transition">Expertise</a>
                 <a href="#tokenomics" class="hover:text-brand-primary transition">Architecture</a>
-                
                 <div class="flex items-center gap-3 ml-2">
-                    <a href="https://wa.me/910000000000" target="_blank" class="w-8 h-8 rounded-lg bg-[#25d366]/10 border border-[#25d366]/30 flex items-center justify-center text-[#25d366] hover:bg-[#25d366] hover:text-white transition">
+                    <a href="https://wa.me/919059794802?text=Hi%20Smart%20Chain%20Labs%2C%20I%27m%20interested%20in%20your%20services." target="_blank" class="w-8 h-8 rounded-lg bg-[#25d366]/10 border border-[#25d366]/30 flex items-center justify-center text-[#25d366] hover:bg-[#25d366] hover:text-white transition">
                         <i data-lucide="message-circle" class="w-4 h-4"></i>
                     </a>
-                    <a href="https://t.me/yourusername" target="_blank" class="w-8 h-8 rounded-lg bg-[#0088cc]/10 border border-[#0088cc]/30 flex items-center justify-center text-[#0088cc] hover:bg-[#0088cc] hover:text-white transition">
+                    <a href="https://t.me/CryptoRovermaster" target="_blank" class="w-8 h-8 rounded-lg bg-[#0088cc]/10 border border-[#0088cc]/30 flex items-center justify-center text-[#0088cc] hover:bg-[#0088cc] hover:text-white transition">
                         <i data-lucide="send" class="w-4 h-4"></i>
+                    </a>
+                    <a href="tel:+919059794802" class="w-8 h-8 rounded-lg bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center text-brand-primary hover:bg-brand-primary hover:text-white transition">
+                        <i data-lucide="phone" class="w-4 h-4"></i>
                     </a>
                 </div>
             </div>
             
             <div class="flex items-center gap-3">
                 <button onclick="openModal()" class="btn-elite px-4 sm:px-6 py-2 sm:py-2.5 text-[9px] sm:text-[10px] uppercase tracking-widest hidden sm:inline-flex">Free Consultation</button>
-                <!-- Mobile hamburger -->
                 <button id="menuBtn" onclick="toggleMenu()" class="lg:hidden w-10 h-10 glass rounded-xl flex items-center justify-center border border-white/10">
                     <i data-lucide="menu" class="w-5 h-5" id="menuIcon"></i>
                 </button>
@@ -278,14 +365,17 @@
         <div id="mobileMenu" class="lg:hidden flex-col gap-4 px-4 pt-4 pb-6 border-t border-white/5 mt-3">
             <a href="#solutions" onclick="toggleMenu()" class="block text-[11px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-primary transition py-2">Solutions</a>
             <a href="#portfolio" onclick="toggleMenu()" class="block text-[11px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-primary transition py-2">Live Projects</a>
-            <a href="#team" onclick="toggleMenu()" class="block text-[11px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-primary transition py-2">Our Team</a>
+            <a href="#expertise" onclick="toggleMenu()" class="block text-[11px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-primary transition py-2">Expertise</a>
             <a href="#tokenomics" onclick="toggleMenu()" class="block text-[11px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-primary transition py-2">Architecture</a>
             <div class="flex gap-3 pt-2">
-                <a href="https://wa.me/910000000000" target="_blank" class="w-9 h-9 rounded-lg bg-[#25d366]/10 border border-[#25d366]/30 flex items-center justify-center text-[#25d366]">
-                    <i data-lucide="message-circle" class="w-4 h-4"></i>
+                <a href="https://wa.me/919059794802" target="_blank" class="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-[#25d366]/10 border border-[#25d366]/30 text-[#25d366] text-[10px] font-black uppercase hover:bg-[#25d366] hover:text-white transition">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i> WhatsApp
                 </a>
-                <a href="https://t.me/yourusername" target="_blank" class="w-9 h-9 rounded-lg bg-[#0088cc]/10 border border-[#0088cc]/30 flex items-center justify-center text-[#0088cc]">
-                    <i data-lucide="send" class="w-4 h-4"></i>
+                <a href="https://t.me/CryptoRovermaster" target="_blank" class="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-[#0088cc]/10 border border-[#0088cc]/30 text-[#0088cc] text-[10px] font-black uppercase hover:bg-[#0088cc] hover:text-white transition">
+                    <i data-lucide="send" class="w-4 h-4"></i> Telegram
+                </a>
+                <a href="tel:+919059794802" class="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-brand-primary/10 border border-brand-primary/30 text-brand-primary text-[10px] font-black uppercase hover:bg-brand-primary hover:text-white transition">
+                    <i data-lucide="phone" class="w-4 h-4"></i> Call
                 </a>
             </div>
             <button onclick="openModal(); toggleMenu()" class="btn-elite w-full py-3 text-[10px] uppercase tracking-widest mt-2">Free Consultation</button>
@@ -293,40 +383,110 @@
     </nav>
 
     <!-- Hero Header -->
-    <header class="relative pt-36 sm:pt-44 md:pt-48 pb-20 sm:pb-28 md:pb-32 px-4 sm:px-6 lg:px-10 text-center overflow-hidden">
+    <header class="relative pt-44 sm:pt-52 md:pt-56 pb-20 sm:pb-28 md:pb-32 px-4 sm:px-6 lg:px-10 text-center overflow-hidden">
         <div class="grid-overlay"></div>
         <div class="max-w-6xl mx-auto reveal active relative z-10">
-            <span class="text-brand-primary font-black text-[10px] uppercase tracking-[0.5em] mb-6 block">India's Premier Web3 Engineering Hub</span>
+            <!-- Trust badges -->
+            <div class="flex flex-wrap justify-center gap-2 mb-6">
+                <span class="trust-pill"><span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span> 50+ Projects Delivered</span>
+                <span class="trust-pill"><span class="w-2 h-2 bg-brand-secondary rounded-full animate-pulse"></span> India's Premier Web3 Hub</span>
+                <span class="trust-pill"><span class="w-2 h-2 bg-brand-accent rounded-full animate-pulse"></span> 100% Client Satisfaction</span>
+            </div>
             <h1 class="font-display font-black text-4xl sm:text-5xl md:text-7xl lg:text-[90px] leading-[0.9] tracking-tighter mb-8 sm:mb-10">
                 CRAFTING SUSTAINABLE <br> <span class="grad-text italic">DIGITAL WEALTH.</span>
             </h1>
             <p class="text-slate-400 text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-10 sm:mb-12 font-medium leading-relaxed">
-                Smart Chain Labs delivers high-performance Blockchain MLM, Tokenomics Modeling, and Centralized Hybrid Systems.
+                Smart Chain Labs delivers high-performance Blockchain MLM, Tokenomics Modeling, and Centralized Hybrid Systems. Trusted by entrepreneurs and enterprises across India, UAE & Singapore.
             </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-5">
-                <button onclick="openModal()" class="btn-elite px-8 sm:px-10 py-4 sm:py-5 text-xs">Connect for Free Consultation</button>
-                <a href="#portfolio" class="glass px-8 sm:px-10 py-4 sm:py-5 rounded-2xl font-bold uppercase text-[10px] tracking-widest hover:bg-white/10 transition flex items-center justify-center gap-2">
-                    <i data-lucide="layout-grid" class="w-4 h-4"></i> View Ecosystem
+            <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-5 mb-10">
+                <button onclick="openModal()" class="btn-elite px-8 sm:px-10 py-4 sm:py-5 text-xs gap-2">
+                    <i data-lucide="zap" class="w-4 h-4"></i> Get Free Consultation
+                </button>
+                <a href="https://wa.me/919059794802?text=Hi%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" class="flex items-center justify-center gap-3 px-8 sm:px-10 py-4 sm:py-5 rounded-2xl font-bold uppercase text-[11px] tracking-widest bg-[#25d366]/10 border border-[#25d366]/30 text-[#25d366] hover:bg-[#25d366] hover:text-white transition">
+                    <svg viewBox="0 0 32 32" class="w-5 h-5 fill-current"><path d="M16 3C9.373 3 4 8.373 4 15c0 2.385.832 4.584 2.225 6.34L4.5 28l6.82-1.693A12.93 12.93 0 0016 27c6.627 0 12-5.373 12-12S22.627 3 16 3zm6.43 8.9l-2.2 10.37c-.16.72-.59.9-1.19.56l-3.3-2.43-1.59 1.53c-.18.18-.33.33-.67.33l.24-3.38 6.13-5.54c.27-.24-.06-.37-.41-.14L9.5 18.64l-3.25-.97c-.71-.22-.72-.71.15-1.05l12.68-4.89c.59-.22 1.11.13.35 1.17z"/></svg>
+                    WhatsApp Us
                 </a>
+                <a href="https://t.me/CryptoRovermaster" target="_blank" class="flex items-center justify-center gap-3 px-8 sm:px-10 py-4 sm:py-5 rounded-2xl font-bold uppercase text-[11px] tracking-widest bg-[#0088cc]/10 border border-[#0088cc]/30 text-[#0088cc] hover:bg-[#0088cc] hover:text-white transition">
+                    <i data-lucide="send" class="w-4 h-4"></i> Telegram
+                </a>
+            </div>
+            <!-- Stats row -->
+            <div class="flex flex-wrap justify-center gap-6 sm:gap-10 mt-4">
+                <div class="text-center">
+                    <div class="font-display font-black text-3xl text-brand-primary">50+</div>
+                    <div class="text-[9px] font-bold text-slate-500 uppercase tracking-widest mt-1">Projects Delivered</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-display font-black text-3xl text-brand-secondary">$12.4M+</div>
+                    <div class="text-[9px] font-bold text-slate-500 uppercase tracking-widest mt-1">Total Payouts Processed</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-display font-black text-3xl text-brand-accent">85k+</div>
+                    <div class="text-[9px] font-bold text-slate-500 uppercase tracking-widest mt-1">Active Users</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-display font-black text-3xl text-white">100%</div>
+                    <div class="text-[9px] font-bold text-slate-500 uppercase tracking-widest mt-1">Client Satisfaction</div>
+                </div>
             </div>
         </div>
     </header>
 
+    <!-- Scrolling Marquee -->
+    <div class="overflow-hidden border-y border-white/5 py-4 bg-white/[0.02]">
+        <div class="marquee-inner text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
+            <span class="px-10">⚡ Smart Contract Development</span>
+            <span class="px-10 text-brand-primary">●</span>
+            <span class="px-10">🔗 Blockchain MLM Systems</span>
+            <span class="px-10 text-brand-secondary">●</span>
+            <span class="px-10">💰 DeFi Protocols</span>
+            <span class="px-10 text-brand-accent">●</span>
+            <span class="px-10">🪙 Token Development</span>
+            <span class="px-10 text-brand-primary">●</span>
+            <span class="px-10">🌐 DApp Development</span>
+            <span class="px-10 text-brand-secondary">●</span>
+            <span class="px-10">📊 Tokenomics Modeling</span>
+            <span class="px-10 text-brand-accent">●</span>
+            <span class="px-10">🛡 Security Audits</span>
+            <span class="px-10 text-brand-primary">●</span>
+            <span class="px-10">⚡ Smart Contract Development</span>
+            <span class="px-10 text-brand-primary">●</span>
+            <span class="px-10">🔗 Blockchain MLM Systems</span>
+            <span class="px-10 text-brand-secondary">●</span>
+            <span class="px-10">💰 DeFi Protocols</span>
+            <span class="px-10 text-brand-accent">●</span>
+            <span class="px-10">🪙 Token Development</span>
+            <span class="px-10 text-brand-primary">●</span>
+            <span class="px-10">🌐 DApp Development</span>
+            <span class="px-10 text-brand-secondary">●</span>
+            <span class="px-10">📊 Tokenomics Modeling</span>
+            <span class="px-10 text-brand-accent">●</span>
+            <span class="px-10">🛡 Security Audits</span>
+            <span class="px-10 text-brand-primary">●</span>
+        </div>
+    </div>
+
     <!-- Solutions Section -->
     <section id="solutions" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-10 relative">
         <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12 reveal">
+                <span class="text-brand-primary font-black text-[10px] uppercase tracking-[0.5em] mb-4 block">What We Build</span>
+                <h2 class="font-display text-4xl sm:text-5xl font-black uppercase tracking-tighter mb-4">Our <span class="grad-text">Core Services</span></h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">End-to-end Web3 engineering from idea to launch. We've delivered 50+ successful projects across blockchain, MLM, and DeFi.</p>
+            </div>
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
                 <div class="glass p-6 sm:p-8 rounded-[2rem] reveal glass-hover">
                     <div class="w-12 h-12 bg-brand-primary/20 rounded-xl flex items-center justify-center mb-6">
                         <i data-lucide="link" class="text-brand-primary w-6 h-6"></i>
                     </div>
                     <h3 class="font-display font-bold text-lg sm:text-xl mb-4 uppercase tracking-tight">Blockchain Development</h3>
-                    <ul class="text-slate-400 text-sm space-y-2">
-                        <li class="flex items-center gap-2 font-semibold"><div class="w-1 h-1 bg-brand-primary flex-shrink-0"></div> Smart contracts</li>
-                        <li class="flex items-center gap-2 font-semibold"><div class="w-1 h-1 bg-brand-primary flex-shrink-0"></div> Token development (ERC20 / BEP20)</li>
-                        <li class="flex items-center gap-2 font-semibold"><div class="w-1 h-1 bg-brand-primary flex-shrink-0"></div> NFT contracts</li>
-                        <li class="flex items-center gap-2 font-semibold"><div class="w-1 h-1 bg-brand-primary flex-shrink-0"></div> DeFi protocols</li>
+                    <ul class="text-slate-400 text-sm space-y-2 mb-6">
+                        <li class="flex items-center gap-2 font-semibold"><div class="w-1 h-1 bg-brand-primary flex-shrink-0 rounded-full"></div> Smart contracts</li>
+                        <li class="flex items-center gap-2 font-semibold"><div class="w-1 h-1 bg-brand-primary flex-shrink-0 rounded-full"></div> Token development (ERC20 / BEP20)</li>
+                        <li class="flex items-center gap-2 font-semibold"><div class="w-1 h-1 bg-brand-primary flex-shrink-0 rounded-full"></div> NFT contracts</li>
+                        <li class="flex items-center gap-2 font-semibold"><div class="w-1 h-1 bg-brand-primary flex-shrink-0 rounded-full"></div> DeFi protocols</li>
                     </ul>
+                    <button onclick="openModal()" class="w-full py-2.5 text-[9px] font-black uppercase tracking-widest border border-brand-primary/30 rounded-xl text-brand-primary hover:bg-brand-primary hover:text-white transition">Get Quote</button>
                 </div>
 
                 <div class="glass p-6 sm:p-8 rounded-[2rem] reveal glass-hover" style="transition-delay: 0.1s;">
@@ -334,12 +494,13 @@
                         <i data-lucide="git-branch" class="text-brand-secondary w-6 h-6"></i>
                     </div>
                     <h3 class="font-display font-bold text-lg sm:text-xl mb-4 uppercase tracking-tight">MLM Software Development</h3>
-                    <ul class="text-slate-400 text-sm space-y-2">
-                        <li class="flex items-center gap-2 font-semibold"><div class="w-1 h-1 bg-brand-secondary flex-shrink-0"></div> Binary MLM</li>
-                        <li class="flex items-center gap-2 font-semibold"><div class="w-1 h-1 bg-brand-secondary flex-shrink-0"></div> Matrix MLM</li>
-                        <li class="flex items-center gap-2 font-semibold"><div class="w-1 h-1 bg-brand-secondary flex-shrink-0"></div> Smart contract MLM</li>
-                        <li class="flex items-center gap-2 font-semibold"><div class="w-1 h-1 bg-brand-secondary flex-shrink-0"></div> Automated commission distribution</li>
+                    <ul class="text-slate-400 text-sm space-y-2 mb-6">
+                        <li class="flex items-center gap-2 font-semibold"><div class="w-1 h-1 bg-brand-secondary flex-shrink-0 rounded-full"></div> Binary MLM</li>
+                        <li class="flex items-center gap-2 font-semibold"><div class="w-1 h-1 bg-brand-secondary flex-shrink-0 rounded-full"></div> Matrix MLM</li>
+                        <li class="flex items-center gap-2 font-semibold"><div class="w-1 h-1 bg-brand-secondary flex-shrink-0 rounded-full"></div> Smart contract MLM</li>
+                        <li class="flex items-center gap-2 font-semibold"><div class="w-1 h-1 bg-brand-secondary flex-shrink-0 rounded-full"></div> Automated commission distribution</li>
                     </ul>
+                    <button onclick="openModal()" class="w-full py-2.5 text-[9px] font-black uppercase tracking-widest border border-brand-secondary/30 rounded-xl text-brand-secondary hover:bg-brand-secondary hover:text-black transition">Get Quote</button>
                 </div>
 
                 <div class="glass p-6 sm:p-8 rounded-[2rem] reveal glass-hover" style="transition-delay: 0.2s;">
@@ -347,12 +508,13 @@
                         <i data-lucide="layout" class="text-brand-accent w-6 h-6"></i>
                     </div>
                     <h3 class="font-display font-bold text-lg sm:text-xl mb-4 uppercase tracking-tight">DApp Development</h3>
-                    <ul class="text-slate-400 text-sm space-y-2">
-                        <li class="flex items-center gap-2 font-semibold"><div class="w-1 h-1 bg-brand-accent flex-shrink-0"></div> Web3 wallet integration</li>
-                        <li class="flex items-center gap-2 font-semibold"><div class="w-1 h-1 bg-brand-accent flex-shrink-0"></div> Staking platforms</li>
-                        <li class="flex items-center gap-2 font-semibold"><div class="w-1 h-1 bg-brand-accent flex-shrink-0"></div> DAO platforms</li>
-                        <li class="flex items-center gap-2 font-semibold"><div class="w-1 h-1 bg-brand-accent flex-shrink-0"></div> DeFi dashboards</li>
+                    <ul class="text-slate-400 text-sm space-y-2 mb-6">
+                        <li class="flex items-center gap-2 font-semibold"><div class="w-1 h-1 bg-brand-accent flex-shrink-0 rounded-full"></div> Web3 wallet integration</li>
+                        <li class="flex items-center gap-2 font-semibold"><div class="w-1 h-1 bg-brand-accent flex-shrink-0 rounded-full"></div> Staking platforms</li>
+                        <li class="flex items-center gap-2 font-semibold"><div class="w-1 h-1 bg-brand-accent flex-shrink-0 rounded-full"></div> DAO platforms</li>
+                        <li class="flex items-center gap-2 font-semibold"><div class="w-1 h-1 bg-brand-accent flex-shrink-0 rounded-full"></div> DeFi dashboards</li>
                     </ul>
+                    <button onclick="openModal()" class="w-full py-2.5 text-[9px] font-black uppercase tracking-widest border border-brand-accent/30 rounded-xl text-brand-accent hover:bg-brand-accent hover:text-black transition">Get Quote</button>
                 </div>
 
                 <div class="glass p-6 sm:p-8 rounded-[2rem] reveal glass-hover" style="transition-delay: 0.3s;">
@@ -361,13 +523,14 @@
                     </div>
                     <h3 class="font-display font-bold text-lg sm:text-xl mb-4 uppercase tracking-tight">Crypto Payment Integration</h3>
                     <p class="text-slate-400 text-xs font-black uppercase mb-4 tracking-widest">Accept payments with:</p>
-                    <div class="flex flex-wrap gap-2">
+                    <div class="flex flex-wrap gap-2 mb-6">
                         <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-[10px] font-bold text-brand-secondary">USDT</span>
                         <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-[10px] font-bold text-brand-secondary">USDC</span>
                         <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-[10px] font-bold text-brand-secondary">ETH</span>
                         <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-[10px] font-bold text-brand-secondary">BNB</span>
                         <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-[10px] font-bold text-brand-secondary">BTC</span>
                     </div>
+                    <button onclick="openModal()" class="w-full py-2.5 text-[9px] font-black uppercase tracking-widest border border-white/20 rounded-xl text-white hover:bg-white/10 transition">Get Quote</button>
                 </div>
             </div>
         </div>
@@ -411,7 +574,7 @@
                             <span class="px-3 py-1 bg-white/5 rounded-lg text-[9px] font-bold border border-white/10 uppercase">Binance Smart Chain</span>
                             <span class="px-3 py-1 bg-white/5 rounded-lg text-[9px] font-bold border border-white/10 uppercase">Solidity</span>
                         </div>
-                        <button class="w-full py-4 glass rounded-xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-brand-primary transition">View Case Study</button>
+                        <button onclick="openModal()" class="w-full py-4 glass rounded-xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-brand-primary transition">Build Something Similar →</button>
                     </div>
                 </div>
 
@@ -431,14 +594,13 @@
                             <span class="px-3 py-1 bg-white/5 rounded-lg text-[9px] font-bold border border-white/10 uppercase">Polygon</span>
                             <span class="px-3 py-1 bg-white/5 rounded-lg text-[9px] font-bold border border-white/10 uppercase">Next.js</span>
                         </div>
-                        <button class="w-full py-4 glass rounded-xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-brand-secondary transition">View Case Study</button>
+                        <button onclick="openModal()" class="w-full py-4 glass rounded-xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-brand-secondary transition">Build Something Similar →</button>
                     </div>
                 </div>
 
                 <div class="glass rounded-[2.5rem] overflow-hidden reveal glass-hover border border-white/5 sm:col-span-2 lg:col-span-1" style="transition-delay: 0.2s;">
                     <div class="h-44 sm:h-48 bg-gradient-to-br from-brand-accent/20 to-black p-6 flex items-center justify-center relative overflow-hidden">
                         <div class="absolute inset-0 grid-overlay opacity-30"></div>
-                        <i data-lucide="shield-check" class="text-brand-accent/40 absolute -right-4 -bottom-4"></i>
                         <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&q=80&w=400" alt="Hybrid Exchange" class="w-full h-full object-cover rounded-xl opacity-60">
                     </div>
                     <div class="p-6 sm:p-8">
@@ -451,7 +613,7 @@
                             <span class="px-3 py-1 bg-white/5 rounded-lg text-[9px] font-bold border border-white/10 uppercase">Node.js</span>
                             <span class="px-3 py-1 bg-white/5 rounded-lg text-[9px] font-bold border border-white/10 uppercase">PostgreSQL</span>
                         </div>
-                        <button class="w-full py-4 glass rounded-xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-brand-accent transition">View Case Study</button>
+                        <button onclick="openModal()" class="w-full py-4 glass rounded-xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-brand-accent transition">Build Something Similar →</button>
                     </div>
                 </div>
             </div>
@@ -505,7 +667,7 @@
             <div class="reveal">
                 <h2 class="font-display text-3xl sm:text-4xl font-black mb-6 uppercase">Data-Driven <br><span class="text-brand-secondary">Security Logic</span></h2>
                 <p class="text-slate-400 mb-8">We utilize advanced infographics and real-time monitoring to ensure your network stays secure. Our architecture is designed to handle high-frequency transactions without compromise.</p>
-                <div class="grid grid-cols-2 gap-3 sm:gap-4">
+                <div class="grid grid-cols-2 gap-3 sm:gap-4 mb-8">
                     <div class="glass p-4 sm:p-6 rounded-2xl flex items-center gap-3 sm:gap-4 reveal glass-hover">
                         <div class="w-3 h-3 bg-brand-secondary rounded-full infographic-dot flex-shrink-0"></div>
                         <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-widest">Active Nodes</span>
@@ -515,6 +677,9 @@
                         <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-widest">Secure Ledger</span>
                     </div>
                 </div>
+                <button onclick="openModal()" class="btn-elite px-8 py-4 text-[10px] uppercase tracking-widest gap-2">
+                    <i data-lucide="shield-check" class="w-4 h-4"></i> Discuss Your Security Needs
+                </button>
             </div>
             <div class="reveal glass p-6 sm:p-8 rounded-[3rem] border border-brand-primary/20 relative overflow-hidden h-[300px] sm:h-[400px] flex items-center justify-center">
                 <div class="relative w-full h-full flex items-center justify-center">
@@ -541,49 +706,93 @@
                 <div class="glass p-8 sm:p-10 rounded-[3rem] reveal glass-hover">
                     <i data-lucide="database" class="text-brand-primary mb-6 sm:mb-8 w-8 h-8 sm:w-10 sm:h-10"></i>
                     <h4 class="text-lg sm:text-xl font-bold mb-4 uppercase">Encrypted Ledger</h4>
-                    <p class="text-sm text-slate-400">Military-grade SQL architecture designed to manage high-volume genealogy data without latency.</p>
+                    <p class="text-sm text-slate-400 mb-6">Military-grade SQL architecture designed to manage high-volume genealogy data without latency.</p>
+                    <button onclick="openModal()" class="text-[9px] font-black uppercase tracking-widest text-brand-primary border-b border-brand-primary/30 pb-0.5 hover:border-brand-primary transition">Learn More →</button>
                 </div>
                 <div class="glass p-8 sm:p-10 rounded-[3rem] reveal glass-hover" style="transition-delay: 0.1s;">
                     <i data-lucide="terminal" class="text-brand-secondary mb-6 sm:mb-8 w-8 h-8 sm:w-10 sm:h-10"></i>
                     <h4 class="text-lg sm:text-xl font-bold mb-4 uppercase">Admin Panel</h4>
-                    <p class="text-sm text-slate-400">Full command suite for user management and real-time global payout triggering.</p>
+                    <p class="text-sm text-slate-400 mb-6">Full command suite for user management and real-time global payout triggering.</p>
+                    <button onclick="openModal()" class="text-[9px] font-black uppercase tracking-widest text-brand-secondary border-b border-brand-secondary/30 pb-0.5 hover:border-brand-secondary transition">Learn More →</button>
                 </div>
                 <div class="glass p-8 sm:p-10 rounded-[3rem] reveal glass-hover sm:col-span-2 lg:col-span-1" style="transition-delay: 0.2s;">
                     <i data-lucide="shield-check" class="text-brand-accent mb-6 sm:mb-8 w-8 h-8 sm:w-10 sm:h-10"></i>
                     <h4 class="text-lg sm:text-xl font-bold mb-4 uppercase">Security Audit</h4>
-                    <p class="text-sm text-slate-400">Deep smart contract and API security layers to prevent unauthorized breaches.</p>
+                    <p class="text-sm text-slate-400 mb-6">Deep smart contract and API security layers to prevent unauthorized breaches.</p>
+                    <button onclick="openModal()" class="text-[9px] font-black uppercase tracking-widest text-brand-accent border-b border-brand-accent/30 pb-0.5 hover:border-brand-accent transition">Learn More →</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Team Section -->
-    <section id="team" class="py-20 sm:py-32 px-4 sm:px-6 lg:px-10">
-        <div class="max-w-7xl mx-auto text-center">
-            <div class="mb-14 sm:mb-20 reveal">
-                <h2 class="font-display text-4xl sm:text-5xl font-black mb-6 uppercase">Our <span class="italic grad-text">Team.</span></h2>
-                <p class="text-slate-400 max-w-xl mx-auto">The engineering minds behind India's most successful MLM deployments.</p>
+    <!-- Expertise Section (replaces Team) -->
+    <section id="expertise" class="py-20 sm:py-32 px-4 sm:px-6 lg:px-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-14 sm:mb-20 reveal">
+                <span class="text-brand-secondary font-black text-[10px] uppercase tracking-[0.4em] mb-4 block">Who We Are</span>
+                <h2 class="font-display text-4xl sm:text-5xl font-black mb-6 uppercase">Our <span class="italic grad-text">Expertise.</span></h2>
+                <p class="text-slate-400 max-w-xl mx-auto">A team of elite blockchain engineers, smart contract auditors, and MLM architects with 8+ years of combined experience.</p>
             </div>
             <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
-                <div class="reveal glass overflow-hidden rounded-[2.5rem] border border-white/5 text-left glass-hover">
-                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&h=500&auto=format&fit=crop" class="w-full h-[260px] sm:h-[320px] object-cover team-image" alt="Architect">
-                    <div class="p-6 sm:p-8">
-                        <h4 class="text-lg sm:text-xl font-bold">Vikram Malhotra</h4>
-                        <p class="text-[10px] text-brand-secondary font-black uppercase">Chief Technology Officer</p>
+                <div class="skill-card reveal">
+                    <div class="w-14 h-14 bg-brand-primary/20 rounded-2xl flex items-center justify-center mb-5 border border-brand-primary/20">
+                        <i data-lucide="code-2" class="text-brand-primary w-7 h-7"></i>
+                    </div>
+                    <h4 class="text-lg font-black uppercase tracking-tight mb-2">Smart Contract Engineering</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">Solidity experts who have audited and deployed 50+ production contracts on Ethereum, BSC, and Polygon.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="trust-pill">Solidity</span>
+                        <span class="trust-pill">Hardhat</span>
+                        <span class="trust-pill">OpenZeppelin</span>
                     </div>
                 </div>
-                <div class="reveal glass overflow-hidden rounded-[2.5rem] border border-white/5 text-left glass-hover" style="transition-delay: 0.1s;">
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&h=500&auto=format&fit=crop" class="w-full h-[260px] sm:h-[320px] object-cover team-image" alt="Strategist">
-                    <div class="p-6 sm:p-8">
-                        <h4 class="text-lg sm:text-xl font-bold">Ananya Sharma</h4>
-                        <p class="text-[10px] text-brand-accent font-black uppercase">Lead Economic Strategist</p>
+                <div class="skill-card reveal" style="transition-delay: 0.1s;">
+                    <div class="w-14 h-14 bg-brand-secondary/20 rounded-2xl flex items-center justify-center mb-5 border border-brand-secondary/20">
+                        <i data-lucide="git-branch" class="text-brand-secondary w-7 h-7"></i>
+                    </div>
+                    <h4 class="text-lg font-black uppercase tracking-tight mb-2">MLM Architecture</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">Specialized in designing and building all types of MLM compensation plans — from Binary and Matrix to Unilevel and Hybrid.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="trust-pill">Binary</span>
+                        <span class="trust-pill">Matrix</span>
+                        <span class="trust-pill">Unilevel</span>
                     </div>
                 </div>
-                <div class="reveal glass overflow-hidden rounded-[2.5rem] border border-white/5 text-left glass-hover sm:col-span-2 md:col-span-1" style="transition-delay: 0.2s;">
-                    <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?q=80&w=400&h=500&auto=format&fit=crop" class="w-full h-[260px] sm:h-[320px] object-cover team-image" alt="Auditor">
-                    <div class="p-6 sm:p-8">
-                        <h4 class="text-lg sm:text-xl font-bold">Rohan Gupta</h4>
-                        <p class="text-[10px] text-brand-primary font-black uppercase">Smart Contract Engineer</p>
+                <div class="skill-card reveal sm:col-span-2 md:col-span-1" style="transition-delay: 0.2s;">
+                    <div class="w-14 h-14 bg-brand-accent/20 rounded-2xl flex items-center justify-center mb-5 border border-brand-accent/20">
+                        <i data-lucide="bar-chart-3" class="text-brand-accent w-7 h-7"></i>
+                    </div>
+                    <h4 class="text-lg font-black uppercase tracking-tight mb-2">Tokenomics & DeFi</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">Deep expertise in tokenomics modeling, liquidity strategy, and building sustainable DeFi ecosystems that scale.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="trust-pill">DeFi</span>
+                        <span class="trust-pill">Tokenomics</span>
+                        <span class="trust-pill">Liquidity</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Choose Us -->
+            <div class="mt-16 sm:mt-24 reveal">
+                <div class="text-center mb-12">
+                    <h3 class="font-display text-3xl sm:text-4xl font-black uppercase tracking-tighter">Why <span class="text-brand-primary">Choose Us?</span></h3>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    <div class="glass p-6 rounded-2xl text-center glass-hover">
+                        <div class="text-3xl font-black text-brand-primary mb-2">50+</div>
+                        <div class="text-[10px] font-black uppercase tracking-widest text-slate-400">Projects Delivered</div>
+                    </div>
+                    <div class="glass p-6 rounded-2xl text-center glass-hover">
+                        <div class="text-3xl font-black text-brand-secondary mb-2">8+</div>
+                        <div class="text-[10px] font-black uppercase tracking-widest text-slate-400">Years Experience</div>
+                    </div>
+                    <div class="glass p-6 rounded-2xl text-center glass-hover">
+                        <div class="text-3xl font-black text-brand-accent mb-2">24/7</div>
+                        <div class="text-[10px] font-black uppercase tracking-widest text-slate-400">Support Available</div>
+                    </div>
+                    <div class="glass p-6 rounded-2xl text-center glass-hover">
+                        <div class="text-3xl font-black text-white mb-2">100%</div>
+                        <div class="text-[10px] font-black uppercase tracking-widest text-slate-400">Client Satisfaction</div>
                     </div>
                 </div>
             </div>
@@ -607,6 +816,9 @@
                         <div class="token-bar-bg"><div class="token-bar-fill" style="width: 45%"></div></div>
                     </div>
                 </div>
+                <button onclick="openModal()" class="btn-elite mt-10 px-8 py-4 text-[10px] uppercase tracking-widest gap-2">
+                    <i data-lucide="zap" class="w-4 h-4"></i> Discuss My Tokenomics
+                </button>
             </div>
             <div class="reveal glass p-2 rounded-[3.5rem] border-2 border-brand-primary/30 analytics-container overflow-hidden">
                 <div class="bg-black/40 p-6 sm:p-10 h-[300px] sm:h-[400px] flex flex-col justify-center">
@@ -636,30 +848,12 @@
 
         <div class="max-w-7xl mx-auto grid lg:grid-cols-3 items-center gap-8 sm:gap-12">
             <div class="space-y-3 sm:space-y-4 reveal">
-                <div class="mlm-plan-card">
-                    <i data-lucide="users" class="text-brand-secondary w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"></i>
-                    <span class="text-xs font-black uppercase tracking-widest">Binary Plans</span>
-                </div>
-                <div class="mlm-plan-card">
-                    <i data-lucide="layers-3" class="text-brand-secondary w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"></i>
-                    <span class="text-xs font-black uppercase tracking-widest">Generation Plan</span>
-                </div>
-                <div class="mlm-plan-card">
-                    <i data-lucide="grid" class="text-brand-secondary w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"></i>
-                    <span class="text-xs font-black uppercase tracking-widest">Matrix Compensation Plan</span>
-                </div>
-                <div class="mlm-plan-card">
-                    <i data-lucide="trending-up" class="text-brand-secondary w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"></i>
-                    <span class="text-xs font-black uppercase tracking-widest">Stair Step Plan</span>
-                </div>
-                <div class="mlm-plan-card">
-                    <i data-lucide="arrow-down-narrow-wide" class="text-brand-secondary w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"></i>
-                    <span class="text-xs font-black uppercase tracking-widest">Monoline MLM Software</span>
-                </div>
-                <div class="mlm-plan-card">
-                    <i data-lucide="party-popper" class="text-brand-secondary w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"></i>
-                    <span class="text-xs font-black uppercase tracking-widest">Party Plan</span>
-                </div>
+                <div class="mlm-plan-card"><i data-lucide="users" class="text-brand-secondary w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"></i><span class="text-xs font-black uppercase tracking-widest">Binary Plans</span></div>
+                <div class="mlm-plan-card"><i data-lucide="layers-3" class="text-brand-secondary w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"></i><span class="text-xs font-black uppercase tracking-widest">Generation Plan</span></div>
+                <div class="mlm-plan-card"><i data-lucide="grid" class="text-brand-secondary w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"></i><span class="text-xs font-black uppercase tracking-widest">Matrix Compensation Plan</span></div>
+                <div class="mlm-plan-card"><i data-lucide="trending-up" class="text-brand-secondary w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"></i><span class="text-xs font-black uppercase tracking-widest">Stair Step Plan</span></div>
+                <div class="mlm-plan-card"><i data-lucide="arrow-down-narrow-wide" class="text-brand-secondary w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"></i><span class="text-xs font-black uppercase tracking-widest">Monoline MLM Software</span></div>
+                <div class="mlm-plan-card"><i data-lucide="party-popper" class="text-brand-secondary w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"></i><span class="text-xs font-black uppercase tracking-widest">Party Plan</span></div>
             </div>
 
             <div class="relative flex items-center justify-center reveal py-8 sm:py-10">
@@ -675,30 +869,40 @@
             </div>
 
             <div class="space-y-3 sm:space-y-4 reveal" style="transition-delay: 0.2s;">
-                <div class="mlm-plan-card">
-                    <i data-lucide="share-2" class="text-brand-secondary w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"></i>
-                    <span class="text-xs font-black uppercase tracking-widest">X Up Plan</span>
-                </div>
-                <div class="mlm-plan-card">
-                    <i data-lucide="gem" class="text-brand-secondary w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"></i>
-                    <span class="text-xs font-black uppercase tracking-widest">EmgoldX Plan</span>
-                </div>
-                <div class="mlm-plan-card">
-                    <i data-lucide="gift" class="text-brand-secondary w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"></i>
-                    <span class="text-xs font-black uppercase tracking-widest">Gift MLM Plan</span>
-                </div>
-                <div class="mlm-plan-card">
-                    <i data-lucide="split" class="text-brand-secondary w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"></i>
-                    <span class="text-xs font-black uppercase tracking-widest">Spillover Binary Plan</span>
-                </div>
-                <div class="mlm-plan-card">
-                    <i data-lucide="table-2" class="text-brand-secondary w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"></i>
-                    <span class="text-xs font-black uppercase tracking-widest">Board Plan</span>
-                </div>
-                <div class="mlm-plan-card">
-                    <i data-lucide="user-check" class="text-brand-secondary w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"></i>
-                    <span class="text-xs font-black uppercase tracking-widest">Unilevel Plan</span>
-                </div>
+                <div class="mlm-plan-card"><i data-lucide="share-2" class="text-brand-secondary w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"></i><span class="text-xs font-black uppercase tracking-widest">X Up Plan</span></div>
+                <div class="mlm-plan-card"><i data-lucide="gem" class="text-brand-secondary w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"></i><span class="text-xs font-black uppercase tracking-widest">EmgoldX Plan</span></div>
+                <div class="mlm-plan-card"><i data-lucide="gift" class="text-brand-secondary w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"></i><span class="text-xs font-black uppercase tracking-widest">Gift MLM Plan</span></div>
+                <div class="mlm-plan-card"><i data-lucide="split" class="text-brand-secondary w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"></i><span class="text-xs font-black uppercase tracking-widest">Spillover Binary Plan</span></div>
+                <div class="mlm-plan-card"><i data-lucide="table-2" class="text-brand-secondary w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"></i><span class="text-xs font-black uppercase tracking-widest">Board Plan</span></div>
+                <div class="mlm-plan-card"><i data-lucide="user-check" class="text-brand-secondary w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"></i><span class="text-xs font-black uppercase tracking-widest">Unilevel Plan</span></div>
+            </div>
+        </div>
+
+        <!-- CTA below MLM plans -->
+        <div class="max-w-2xl mx-auto text-center mt-16 reveal">
+            <p class="text-slate-400 mb-6 font-medium">Don't see your plan? We build any custom MLM compensation structure.</p>
+            <button onclick="openModal()" class="btn-elite px-10 py-4 text-[11px] uppercase tracking-widest gap-2">
+                <i data-lucide="message-circle" class="w-4 h-4"></i> Discuss My MLM Plan
+            </button>
+        </div>
+    </section>
+
+    <!-- Mid-page CTA Section -->
+    <section class="py-16 px-4 sm:px-6 lg:px-10 bg-gradient-to-r from-brand-primary/10 via-brand-dark to-brand-secondary/10 border-y border-white/5">
+        <div class="max-w-4xl mx-auto text-center reveal">
+            <h2 class="font-display text-3xl sm:text-4xl font-black uppercase tracking-tighter mb-4">Ready to Launch Your <span class="grad-text">Web3 Project?</span></h2>
+            <p class="text-slate-400 mb-8 max-w-xl mx-auto">Get a free consultation and custom quote within 30 minutes. Our engineers are available now.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button onclick="openModal()" class="btn-elite px-8 py-4 text-[11px] uppercase tracking-widest gap-2">
+                    <i data-lucide="mail" class="w-4 h-4"></i> Get Free Quote
+                </button>
+                <a href="https://wa.me/919059794802?text=Hi%2C%20I%20have%20a%20Web3%20project%20to%20discuss." target="_blank" class="flex items-center gap-2 px-8 py-4 rounded-2xl bg-[#25d366] text-white font-black text-[11px] uppercase tracking-widest hover:scale-105 transition">
+                    <svg viewBox="0 0 32 32" class="w-5 h-5 fill-white"><path d="M16 3C9.373 3 4 8.373 4 15c0 2.385.832 4.584 2.225 6.34L4.5 28l6.82-1.693A12.93 12.93 0 0016 27c6.627 0 12-5.373 12-12S22.627 3 16 3zm6.43 8.9l-2.2 10.37c-.16.72-.59.9-1.19.56l-3.3-2.43-1.59 1.53c-.18.18-.33.33-.67.33l.24-3.38 6.13-5.54c.27-.24-.06-.37-.41-.14L9.5 18.64l-3.25-.97c-.71-.22-.72-.71.15-1.05l12.68-4.89c.59-.22 1.11.13.35 1.17z"/></svg>
+                    WhatsApp: +91 9059794802
+                </a>
+                <a href="https://t.me/CryptoRovermaster" target="_blank" class="flex items-center gap-2 px-8 py-4 rounded-2xl bg-[#0088cc] text-white font-black text-[11px] uppercase tracking-widest hover:scale-105 transition">
+                    <i data-lucide="send" class="w-4 h-4"></i> @CryptoRovermaster
+                </a>
             </div>
         </div>
     </section>
@@ -717,10 +921,31 @@
                     <p class="text-slate-400 text-sm max-w-sm leading-relaxed mb-8">
                         The definitive engineering firm for institutional blockchain projects and advanced MLM ecosystems. Built for scale, secured by math.
                     </p>
+                    <!-- Contact Links -->
+                    <div class="space-y-3 mb-6">
+                        <a href="https://wa.me/919059794802" target="_blank" class="flex items-center gap-3 text-[#25d366] text-sm font-bold hover:underline">
+                            <svg viewBox="0 0 32 32" class="w-5 h-5 flex-shrink-0 fill-current"><path d="M16 3C9.373 3 4 8.373 4 15c0 2.385.832 4.584 2.225 6.34L4.5 28l6.82-1.693A12.93 12.93 0 0016 27c6.627 0 12-5.373 12-12S22.627 3 16 3zm6.43 8.9l-2.2 10.37c-.16.72-.59.9-1.19.56l-3.3-2.43-1.59 1.53c-.18.18-.33.33-.67.33l.24-3.38 6.13-5.54c.27-.24-.06-.37-.41-.14L9.5 18.64l-3.25-.97c-.71-.22-.72-.71.15-1.05l12.68-4.89c.59-.22 1.11.13.35 1.17z"/></svg>
+                            WhatsApp: +91 9059794802
+                        </a>
+                        <a href="https://t.me/CryptoRovermaster" target="_blank" class="flex items-center gap-3 text-[#0088cc] text-sm font-bold hover:underline">
+                            <i data-lucide="send" class="w-4 h-4 flex-shrink-0"></i>
+                            Telegram: @CryptoRovermaster
+                        </a>
+                        <a href="tel:+919059794802" class="flex items-center gap-3 text-brand-primary text-sm font-bold hover:underline">
+                            <i data-lucide="phone" class="w-4 h-4 flex-shrink-0"></i>
+                            Call: +91 9059794802
+                        </a>
+                    </div>
                     <div class="flex gap-4">
-                        <a href="#" class="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center hover:bg-brand-primary transition"><i data-lucide="twitter" class="w-4 h-4"></i></a>
-                        <a href="#" class="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center hover:bg-brand-primary transition"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
-                        <a href="#" class="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center hover:bg-brand-primary transition"><i data-lucide="github" class="w-4 h-4"></i></a>
+                        <a href="https://wa.me/919059794802" target="_blank" class="w-10 h-10 bg-[#25d366]/10 border border-[#25d366]/30 rounded-lg flex items-center justify-center hover:bg-[#25d366] transition text-[#25d366]">
+                            <svg viewBox="0 0 32 32" class="w-4 h-4 fill-current"><path d="M16 3C9.373 3 4 8.373 4 15c0 2.385.832 4.584 2.225 6.34L4.5 28l6.82-1.693A12.93 12.93 0 0016 27c6.627 0 12-5.373 12-12S22.627 3 16 3zm6.43 8.9l-2.2 10.37c-.16.72-.59.9-1.19.56l-3.3-2.43-1.59 1.53c-.18.18-.33.33-.67.33l.24-3.38 6.13-5.54c.27-.24-.06-.37-.41-.14L9.5 18.64l-3.25-.97c-.71-.22-.72-.71.15-1.05l12.68-4.89c.59-.22 1.11.13.35 1.17z"/></svg>
+                        </a>
+                        <a href="https://t.me/CryptoRovermaster" target="_blank" class="w-10 h-10 bg-[#0088cc]/10 border border-[#0088cc]/30 rounded-lg flex items-center justify-center hover:bg-[#0088cc] transition text-[#0088cc]">
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                        </a>
+                        <a href="tel:+919059794802" class="w-10 h-10 bg-brand-primary/10 border border-brand-primary/30 rounded-lg flex items-center justify-center hover:bg-brand-primary transition text-brand-primary">
+                            <i data-lucide="phone" class="w-4 h-4"></i>
+                        </a>
                     </div>
                 </div>
                 <div class="reveal" style="transition-delay: 0.1s;">
@@ -733,17 +958,17 @@
                     </ul>
                 </div>
                 <div class="reveal" style="transition-delay: 0.2s;">
-                    <h5 class="text-xs font-black uppercase tracking-widest text-slate-500 mb-5 sm:mb-6">Support</h5>
+                    <h5 class="text-xs font-black uppercase tracking-widest text-slate-500 mb-5 sm:mb-6">Quick Links</h5>
                     <ul class="text-slate-400 text-sm space-y-3 sm:space-y-4 font-bold">
-                        <li>System Status</li>
-                        <li>API Documentation</li>
-                        <li>Security Audits</li>
-                        <li>Legal Disclaimer</li>
+                        <li><a href="#solutions" class="hover:text-brand-primary transition">Our Services</a></li>
+                        <li><a href="#portfolio" class="hover:text-brand-primary transition">Live Projects</a></li>
+                        <li><a href="#expertise" class="hover:text-brand-primary transition">Our Expertise</a></li>
+                        <li><button onclick="openModal()" class="hover:text-brand-primary transition text-left">Free Consultation</button></li>
                     </ul>
                 </div>
             </div>
             <div class="pt-8 sm:pt-10 border-t border-white/5 text-center">
-                <p class="text-[9px] font-black uppercase tracking-[0.6em] text-slate-600">© 2026 Smart Chain Labs // Professional Software Engineering</p>
+                <p class="text-[9px] font-black uppercase tracking-[0.6em] text-slate-600">© 2026 Smart Chain Labs // Professional Blockchain Engineering</p>
             </div>
         </div>
     </footer>
@@ -753,9 +978,7 @@
 
         // Scroll Reveal
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
@@ -763,44 +986,30 @@
         const modal = document.getElementById('contactModal');
         function openModal() { modal.classList.add('show'); document.body.style.overflow = 'hidden'; }
         function closeModal() { modal.classList.remove('show'); document.body.style.overflow = ''; }
-
-        // Close modal on backdrop click
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) closeModal();
-        });
+        modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
 
         // Mobile Menu Toggle
         function toggleMenu() {
             const menu = document.getElementById('mobileMenu');
             const icon = document.getElementById('menuIcon');
             menu.classList.toggle('open');
-            if (menu.classList.contains('open')) {
-                icon.setAttribute('data-lucide', 'x');
-            } else {
-                icon.setAttribute('data-lucide', 'menu');
-            }
+            icon.setAttribute('data-lucide', menu.classList.contains('open') ? 'x' : 'menu');
             lucide.createIcons();
         }
 
-        // Auto Popup Logic (5s Start + 1m Repeat)
+        // Auto Popup Logic (8s Start + 90s Repeat)
         function startAutoPopup() {
             setTimeout(() => {
                 openModal();
-                setInterval(() => {
-                    if (!modal.classList.contains('show')) {
-                        openModal();
-                    }
-                }, 60000); 
-            }, 5000);
+                setInterval(() => { if (!modal.classList.contains('show')) openModal(); }, 90000);
+            }, 8000);
         }
         startAutoPopup();
 
-        // Hurry Popup Logic (Shows after 3 seconds)
-        setTimeout(() => {
-            document.getElementById('hurryPopup').classList.add('active');
-        }, 3000);
+        // Hurry Popup (3s delay)
+        setTimeout(() => { document.getElementById('hurryPopup').classList.add('active'); }, 3000);
 
-        // Form Submission Handling
+        // Form Submission
         const form = document.getElementById('eliteForm');
         const formContainer = document.getElementById('formContainer');
         const successMessage = document.getElementById('successMessage');
@@ -809,27 +1018,28 @@
         form.onsubmit = async (e) => {
             e.preventDefault();
             submitBtn.disabled = true;
-            submitBtn.innerText = "Transmitting Data...";
-
+            submitBtn.innerText = "Sending...";
             const formData = new FormData(form);
-            
             try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: { 'Accept': 'application/json' }
-                });
+                const response = await fetch(form.action, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
                 if (response.ok) {
                     formContainer.classList.add('hidden');
                     successMessage.classList.remove('hidden');
                     form.reset();
                 }
             } catch (error) {
-                alert("Submission failed. Please check your connection.");
+                alert("Submission failed. Please WhatsApp us directly at +91 9059794802");
                 submitBtn.disabled = false;
-                submitBtn.innerText = "Retry Free Consultation";
+                submitBtn.innerText = "🚀 Send My Free Consultation Request";
             }
         };
+
+        // Exit Intent
+        document.addEventListener('mouseleave', function(e) {
+            if (e.clientY < 10 && !modal.classList.contains('show')) {
+                openModal();
+            }
+        });
     </script>
 
     <script type="text/javascript">
