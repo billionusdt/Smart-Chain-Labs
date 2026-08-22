@@ -227,11 +227,11 @@
             box-shadow: 0 0 50px rgba(124, 58, 237, 0.2);
         }
 
-        /* Mobile nav hamburger */
-        #mobileMenu { display: none; }
-        #mobileMenu.open { display: flex; }
+        /* Mobile drawer */
+        #mobileMenu { display: none; flex-direction: column; }
 
-        section, header, footer, nav { max-width: 100vw; overflow-x: hidden; }
+        section, header, footer { max-width: 100vw; overflow-x: hidden; }
+        nav { max-width: 100vw; overflow: visible; }
 
         @media (max-width: 640px) {
             #hurryPopup { left: 8px; right: 8px; bottom: 110px; max-width: calc(100vw - 16px); }
@@ -315,13 +315,13 @@
     <div class="glow-bg"></div>
 
     <!-- Urgency Top Banner -->
-    <div class="urgency-bar py-2 px-4 text-center text-[10px] font-black uppercase tracking-widest text-white fixed top-0 left-0 right-0 z-[200]">
+    <div class="urgency-bar py-2 px-4 text-center text-[10px] font-black uppercase tracking-widest text-white fixed top-0 left-0 right-0 z-[400]">
         ⚡ Limited Slots Available — Free Consultation Ends Soon &nbsp;|&nbsp; 
         <a href="https://wa.me/919059794802" target="_blank" class="underline">Chat on WhatsApp Now →</a>
     </div>
 
     <!-- Hurry Popup -->
-    <div id="hurryPopup" class="fixed bottom-28 left-4 sm:bottom-10 sm:left-6 z-[60] w-[calc(100vw-2rem)] sm:w-auto sm:max-w-[300px]">
+    <div id="hurryPopup" class="fixed bottom-28 left-4 sm:bottom-10 sm:left-6 z-[310] w-[calc(100vw-2rem)] sm:w-auto sm:max-w-[300px]">
         <div class="glass p-5 rounded-3xl border border-brand-accent/40 shadow-2xl relative overflow-hidden">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 flex-shrink-0 bg-brand-accent/20 rounded-2xl flex items-center justify-center text-brand-accent">
@@ -338,7 +338,7 @@
     </div>
 
     <!-- Contact Modal -->
-    <div id="contactModal" class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm">
+    <div id="contactModal" class="fixed inset-0 z-[380] bg-black/80 backdrop-blur-sm">
         <div class="glass-sheet glass p-6 md:p-10 relative border-t border-brand-primary/30 shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
             <div class="w-12 h-1.5 bg-white/20 rounded-full mx-auto mb-6"></div>
             <button onclick="closeModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white transition z-10">
@@ -418,7 +418,7 @@
     </div>
 
     <!-- ✅ Floating Action Buttons: Call + WhatsApp + Telegram -->
-    <div class="fixed bottom-6 right-4 sm:bottom-8 sm:right-6 flex flex-col gap-3 z-50">
+    <div class="fixed bottom-6 right-4 sm:bottom-8 sm:right-6 flex flex-col gap-3 z-[300]">
         <div class="float-btn bg-brand-primary wa-glow" onclick="openModal()" style="cursor:pointer;">
             <i data-lucide="mail" class="text-white w-5 h-5"></i>
             <span class="tooltip">Get Free Quote</span>
@@ -438,7 +438,7 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 py-4 px-4 sm:px-6 lg:px-10 top-8 border-b border-white/5 bg-brand-dark/60 backdrop-blur-xl">
+    <nav class="fixed w-full z-[350] py-4 px-4 sm:px-6 lg:px-10 top-8 border-b border-white/5 bg-brand-dark/60 backdrop-blur-xl">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 sm:w-12 sm:h-12 bg-white/5 p-1 rounded-xl flex items-center justify-center border border-white/10 shadow-xl flex-shrink-0">
@@ -463,7 +463,7 @@
                         <i data-lucide="chevron-down" class="w-3 h-3 transition-transform duration-300 group-hover:rotate-180"></i>
                     </button>
                     <!-- Mega panel -->
-                    <div class="absolute top-[calc(100%+18px)] left-1/2 -translate-x-1/2 w-[580px] pointer-events-none opacity-0 translate-y-2 group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-[200]">
+                    <div class="absolute top-[calc(100%+18px)] left-1/2 -translate-x-1/2 w-[580px] pointer-events-none opacity-0 translate-y-2 group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-[360]">
                         <!-- Arrow -->
                         <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rotate-45 bg-[#0d1120] border-l border-t border-white/10"></div>
                         <div class="bg-[#0d1120] border border-white/10 rounded-2xl shadow-[0_24px_60px_rgba(0,0,0,0.7)] overflow-hidden">
@@ -581,7 +581,7 @@
 
             <div class="flex items-center gap-3">
                 <button onclick="openModal()" class="btn-elite px-4 sm:px-6 py-2 sm:py-2.5 text-[9px] sm:text-[10px] uppercase tracking-widest hidden sm:inline-flex">Free Consultation</button>
-                <button id="menuBtn" onclick="toggleMenu()" class="lg:hidden w-10 h-10 glass rounded-xl flex items-center justify-center border border-white/10 z-[300] relative">
+                <button id="menuBtn" onclick="toggleMenu()" class="lg:hidden w-10 h-10 glass rounded-xl flex items-center justify-center border border-white/10">
                     <i data-lucide="menu" class="w-5 h-5" id="menuIcon"></i>
                 </button>
             </div>
@@ -589,7 +589,7 @@
     </nav>
 
     <!-- Mobile Full-Screen Drawer (outside nav so it covers full viewport) -->
-    <div id="mobileMenu" class="fixed inset-0 z-[250] bg-[#020617]/98 backdrop-blur-xl flex-col lg:hidden" style="display:none;">
+    <div id="mobileMenu" class="fixed inset-0 z-[370] bg-[#020617]/98 backdrop-blur-xl flex-col lg:hidden" style="display:none;">
         <!-- Drawer Header -->
         <div class="flex items-center justify-between px-5 py-5 border-b border-white/5">
             <div class="flex items-center gap-3">
